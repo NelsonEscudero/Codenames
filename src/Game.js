@@ -1,17 +1,17 @@
-export const WORDS = [
+const WORDS = [
   "NURSE","DOCTOR","HOSPITAL","PATIENT","BANDAGE","BLOOD","BONES","SKULL","ZOMBIE","WITCH",
   "SYRINGE","GHOST","VIRUS","COFFIN","MASK","PLAGUE","HEART","TOMB","CURE","POTION",
   "FRACTURE","MORGUE","FEVER","GRAVE","BRAIN","STITCH","LAB","MONSTER","CAST","SCREAM",
 ];
 
-export const ROLES = {
+const ROLES = {
   RED: "red",
   BLUE: "blue",
   NEUTRAL: "neutral",
   ASSASSIN: "assassin",
 };
 
-export function shuffle(arr) {
+function shuffle(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -20,11 +20,11 @@ export function shuffle(arr) {
   return a;
 }
 
-export function drawBoardWords(words) {
+function drawBoardWords(words) {
   return shuffle(words).slice(0, 25);
 }
 
-export function assignRoles(startingTeam) {
+function assignRoles(startingTeam) {
   const counts = startingTeam === ROLES.RED
     ? { red: 9, blue: 8, neutral: 7, assassin: 1 }
     : { red: 8, blue: 9, neutral: 7, assassin: 1 };
@@ -38,7 +38,7 @@ export function assignRoles(startingTeam) {
   return shuffle(roles);
 }
 
-export function makeNewGame() {
+function makeNewGame() {
   const startingTeam = Math.random() < 0.5 ? ROLES.RED : ROLES.BLUE;
   const words = drawBoardWords(WORDS);
   const roles = assignRoles(startingTeam);
@@ -49,3 +49,5 @@ export function makeNewGame() {
   };
   return { cards, currentTeam: startingTeam, remaining, winner: null, assassinHit: false };
 }
+
+export { ROLES, makeNewGame };

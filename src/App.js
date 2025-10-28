@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import "./App.css";
-import { WORDS, ROLES, shuffle, drawBoardWords, assignRoles, makeNewGame } from "./Game";
+import { ROLES, makeNewGame } from "./Game";
 
 export default function App() {
   const [game, setGame] = useState(makeNewGame());
@@ -10,7 +10,7 @@ export default function App() {
   const [guessesLeft, setGuessesLeft] = useState(0);
   const [history, setHistory] = useState([]);
 
-  const { cards, currentTeam, remaining, winner, assassinHit } = game;
+  const { cards, currentTeam, winner } = game;
   const otherTeam = currentTeam === ROLES.RED ? ROLES.BLUE : ROLES.RED;
 
   const canGuess = winner == null && guessesLeft > 0;
