@@ -8,21 +8,14 @@ function DecorLayer() {
       <div className="blood-banner" />
       <div className="web-top-right" />
       <img src="/skeleton.gif" alt="dancing skeleton" className="skeleton-left" />
-    </div>
-  );
-}
-function HalloweenDecor() {
-  return (
-    <>
-      {/* floating emoji (replace with <img src="/pumpkin.png" .../> if you add files) */}
-      <div className="floaters" aria-hidden="true">
-        <span className="floater pumpkin" style={{ left: "6%", animationDelay: "0s" }}>🎃</span>
-        <span className="floater ghost"   style={{ left: "22%", animationDelay: ".6s" }}>👻</span>
-        <span className="floater mummy"   style={{ left: "38%", animationDelay: ".2s" }}>🧟</span>
-        <span className="floater pumpkin" style={{ left: "58%", animationDelay: ".9s" }}>🎃</span>
-        <span className="floater ghost"   style={{ left: "78%", animationDelay: ".3s" }}>👻</span>
+      <div className="floaters">
+        <span className="floater pumpkin" style={{ left: "6%",  animationDelay: "0s"  }}>🎃</span>
+        <span className="floater ghost"   style={{ left: "22%", animationDelay: ".4s" }}>👻</span>
+        <span className="floater mummy"   style={{ left: "40%", animationDelay: ".2s" }}>🧟</span>
+        <span className="floater pumpkin" style={{ left: "62%", animationDelay: ".8s" }}>🎃</span>
+        <span className="floater ghost"   style={{ left: "80%", animationDelay: ".3s" }}>👻</span>
       </div>
-    </>
+    </div>
   );
 }
 

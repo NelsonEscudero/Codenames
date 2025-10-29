@@ -1,15 +1,6 @@
-body {
-  background: #000000;
-  color: #eee;
-  font-family: sans-serif;
-}
+body { margin:0; background:#000; color:#eee; font-family:sans-serif; }
+.app { position:relative; z-index:3; max-width:900px; margin:auto; text-align:center; padding:20px; }
 
-.app {
-  max-width: 900px;
-  margin: auto;
-  text-align: center;
-  padding: 20px;
-}
 
 .board {
   display: grid;
@@ -42,20 +33,13 @@ body {
 }
 
 .site-header {
-  position: relative;
   margin-bottom: 8px;
 }
 
 /* Keep the nice spooky title */
 .bloody {
-  font-size: 52px;
-  margin: 8px 0 6px;
-  letter-spacing: 1px;
-  color: #f2e7e7;
-  text-shadow:
-    0 0 4px #520000,
-    0 0 10px #7a0000,
-    0 0 18px #c30000;
+  font-size:52px; margin:8px 0 6px; letter-spacing:1px; color:#f2e7e7;
+  text-shadow:0 0 4px #520000, 0 0 10px #7a0000, 0 0 18px #c30000;
 }
 
 /* === DECOR LAYER (behind content) === */
@@ -71,8 +55,6 @@ body {
   position: relative;
   z-index: 3;
 }
-
-
 
 .blood-banner{
   position: absolute; top:0; left:0; right:0; height:130px; opacity:.95;
@@ -133,7 +115,7 @@ body {
 .skeleton-left {
   position: absolute;
   left: 24px;
-  bottom: 160px;
+  bottom: 250px;
   width: 160px;
   height: auto;
   opacity: 0.9;
@@ -146,4 +128,16 @@ body {
   50% { transform: translateY(-12px); }
 }
 
-.blood-banner { mix-blend-mode: multiply; }
+.floaters{ position:fixed; inset:0; pointer-events:none; z-index:2; }
+.floater{
+  position:absolute; bottom:18vh; /* start near bottom */
+  font-size:56px;                 /* bigger */
+  opacity:.9; filter: drop-shadow(0 0 8px rgba(0,0,0,.35));
+  animation: floatY 6.5s ease-in-out infinite, sway 3.2s ease-in-out infinite;
+}
+.floater.pumpkin{ filter: drop-shadow(0 0 10px rgba(255,120,0,.6)); }
+.floater.ghost  { filter: drop-shadow(0 0 10px rgba(180,210,255,.6)); }
+.floater.mummy  { filter: drop-shadow(0 0 10px rgba(120,255,155,.6)); }
+
+@keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-120px)} }
+@keyframes sway   { 0%,100%{transform:translateX(0) rotate(0)} 50%{transform:translateX(16px) rotate(2deg)} }
