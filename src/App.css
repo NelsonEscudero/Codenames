@@ -1,5 +1,5 @@
 body {
-  background: #111111;
+  background: #000000;
   color: #eee;
   font-family: sans-serif;
 }
@@ -40,3 +40,110 @@ body {
   margin: 5px;
   padding: 6px 8px;
 }
+
+.site-header {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+/* Keep the nice spooky title */
+.bloody {
+  font-size: 52px;
+  margin: 8px 0 6px;
+  letter-spacing: 1px;
+  color: #f2e7e7;
+  text-shadow:
+    0 0 4px #520000,
+    0 0 10px #7a0000,
+    0 0 18px #c30000;
+}
+
+/* === DECOR LAYER (behind content) === */
+.decor-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;   /* do not block clicks */
+  z-index: 2;
+}
+
+/* ensure app sits above decor */
+.app {
+  position: relative;
+  z-index: 3;
+}
+
+
+
+.blood-banner{
+  position: absolute; top:0; left:0; right:0; height:130px; opacity:.95;
+  background: linear-gradient(#980000, #5c0000);
+  /* mask uses a data-URI SVG path to create irregular drips */
+  -webkit-mask: url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 200' preserveAspectRatio='none'>\
+      <rect width='1600' height='200' fill='black'/>\
+      <path d='M0,70 C120,110 220,40 340,80 C440,115 520,50 640,85 C760,120 860,40 980,80 C1100,120 1180,45 1300,80 C1420,115 1500,55 1600,80 L1600,200 L0,200 Z' fill='white'/>\
+      <path d=\"M140,70 v110 a30,30 0 0 0 60,0 v-110 z\" fill='white'/>\
+      <path d=\"M730,80 v95  a26,26 0 0 0 52,0  v-95  z\" fill='white'/>\
+      <path d=\"M1180,78 v120 a34,34 0 0 0 68,0 v-120 z\" fill='white'/>\
+    </svg>") center / 100% 100% no-repeat;
+          mask: url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 200' preserveAspectRatio='none'>\
+      <rect width='1600' height='200' fill='black'/>\
+      <path d='M0,70 C120,110 220,40 340,80 C440,115 520,50 640,85 C760,120 860,40 980,80 C1100,120 1180,45 1300,80 C1420,115 1500,55 1600,80 L1600,200 L0,200 Z' fill='white'/>\
+      <path d=\"M140,70 v110 a30,30 0 0 0 60,0 v-110 z\" fill='white'/>\
+      <path d=\"M730,80 v95  a26,26 0 0 0 52,0  v-95  z\" fill='white'/>\
+      <path d=\"M1180,78 v120 a34,34 0 0 0 68,0 v-120 z\" fill='white'/>\
+    </svg>") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 3px 0 #2b0000);
+}
+
+.blood-banner::after{
+  content:"";
+  position:absolute; inset:0;
+  -webkit-mask: radial-gradient(20px 40px at 150px 140px, black 60%, transparent 62%),
+                radial-gradient(18px 36px at 760px 135px, black 60%, transparent 62%),
+                radial-gradient(22px 46px at 1220px 150px, black 60%, transparent 62%);
+          mask: radial-gradient(20px 40px at 150px 140px, black 60%, transparent 62%),
+                radial-gradient(18px 36px at 760px 135px, black 60%, transparent 62%),
+                radial-gradient(22px 46px at 1220px 150px, black 60%, transparent 62%);
+  background: rgba(255,0,0,.22);
+  animation: ooze 4.5s ease-in-out infinite;
+}
+@keyframes ooze{
+  0%,100%{ transform: translateY(0); opacity:.25 }
+  50%    { transform: translateY(6px); opacity:.35 }
+}
+
+/* ========== SPIDER WEB (vector, no image) ========== */
+.web-top-right{
+  position:absolute; top:10px; right:10px; width:280px; height:280px; opacity:.55;
+  background:
+    url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' fill='none' stroke='white' stroke-opacity='0.7' stroke-width='2'>\
+        <path d='M300 0 L150 80 L300 140'/>\
+        <path d='M300 0 L210 140 L300 220'/>\
+        <path d='M300 0 L260 220 L300 300'/>\
+        <path d='M300 80 Q230 100 170 150 Q230 160 300 180'/>\
+        <path d='M300 140 Q240 160 200 200 Q240 220 300 240'/>\
+        <path d='M300 200 Q255 220 220 250 Q260 270 300 280'/>\
+      </svg>") center/contain no-repeat;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,.15));
+}
+
+.skeleton-left {
+  position: absolute;
+  left: 24px;
+  bottom: 160px;
+  width: 160px;
+  height: auto;
+  opacity: 0.9;
+  animation: bob 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.blood-banner { mix-blend-mode: multiply; }

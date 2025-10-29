@@ -2,6 +2,30 @@ import React, { useState, useMemo } from "react";
 import "./App.css";
 import { ROLES, makeNewGame } from "./Game";
 
+function DecorLayer() {
+  return (
+    <div className="decor-layer" aria-hidden="true">
+      <div className="blood-banner" />
+      <div className="web-top-right" />
+      <img src="/skeleton.gif" alt="dancing skeleton" className="skeleton-left" />
+    </div>
+  );
+}
+function HalloweenDecor() {
+  return (
+    <>
+      {/* floating emoji (replace with <img src="/pumpkin.png" .../> if you add files) */}
+      <div className="floaters" aria-hidden="true">
+        <span className="floater pumpkin" style={{ left: "6%", animationDelay: "0s" }}>🎃</span>
+        <span className="floater ghost"   style={{ left: "22%", animationDelay: ".6s" }}>👻</span>
+        <span className="floater mummy"   style={{ left: "38%", animationDelay: ".2s" }}>🧟</span>
+        <span className="floater pumpkin" style={{ left: "58%", animationDelay: ".9s" }}>🎃</span>
+        <span className="floater ghost"   style={{ left: "78%", animationDelay: ".3s" }}>👻</span>
+      </div>
+    </>
+  );
+}
+
 export default function App() {
   const [game, setGame] = useState(makeNewGame());
   const [codemaster, setCodemaster] = useState(false);
@@ -78,33 +102,39 @@ export default function App() {
   }
 
   return (
-    <div className="app">
-      <h1>Codenames</h1>
-      <p>{statusText}</p>
+    <>
+      <DecorLayer />
+      <div className="app">
+        <header className="site-header">
+          <h1 className="bloody">Codenames</h1>
+        </header>
 
-      <button onClick={() => setCodemaster(c => !c)}>
-        {codemaster ? "Hide Codemaster" : "Show Codemaster"}
-      </button>
-      <button onClick={resetGame}>New Game</button>
+         <p>{statusText}</p>
 
-      <div className="hint-controls">
-        <input value={hintText} onChange={e => setHintText(e.target.value)} placeholder="Hint word" />
-        <input type="number" value={hintCount} onChange={e => setHintCount(e.target.value)} />
-        <button onClick={giveHint}>Give Hint</button>
-        <button onClick={endTurn}>End Turn</button>
+        <button onClick={() => setCodemaster(c => !c)}>
+          {codemaster ? "Hide Codemaster" : "Show Codemaster"}
+        </button>
+        <button onClick={resetGame}>New Game</button>
+
+        <div className="hint-controls">
+          <input value={hintText} onChange={e => setHintText(e.target.value)} placeholder="Hint word" />
+          <input type="number" value={hintCount} onChange={e => setHintCount(e.target.value)} />
+          <button onClick={giveHint}>Give Hint</button>
+          <button onClick={endTurn}>End Turn</button>
+        </div>
+
+        <div className="board">
+          {cards.map((c, i) => (
+            <div
+              key={i}
+              className={`card ${c.revealed ? c.role : ""} ${codemaster && !c.revealed ? c.role + "-hidden" : ""}`}
+              onClick={() => revealCard(i)}
+            >
+              {c.word}
+            </div>
+          ))}
+        </div>
       </div>
-
-      <div className="board">
-        {cards.map((c, i) => (
-          <div
-            key={i}
-            className={`card ${c.revealed ? c.role : ""} ${codemaster && !c.revealed ? c.role + "-hidden" : ""}`}
-            onClick={() => revealCard(i)}
-          >
-            {c.word}
-          </div>
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
